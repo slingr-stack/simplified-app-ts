@@ -5,6 +5,7 @@ import { Text } from "../../framework/shared/types/Text";
 import { LongText } from "../../framework/shared/types/LongText";
 import { BaseEntity } from "typeorm";
 import { Choice } from "../../framework/shared/types/Choice";
+import { Integer } from "../../framework/shared/types/Integer";
 
 @Entity({
     label: 'Projects',
@@ -14,6 +15,7 @@ export class Project extends BaseEntity {
     @Field({
         label: "ID"
     })
+    @Integer()
     @AutoIncremental()
     id!: number;
 
