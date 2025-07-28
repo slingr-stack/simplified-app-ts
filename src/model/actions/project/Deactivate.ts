@@ -1,7 +1,8 @@
-import { Action } from "../../../framework/model/Action";
+import { Action } from "../../../framework/shared/Action";
 import { Project, Status } from "../../entities/Project";
 
 @Action({
+    label: 'Deactivate',
     type: 'record',
     entity: Project
 })

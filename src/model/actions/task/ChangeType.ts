@@ -1,11 +1,12 @@
-import { Action } from "../../../framework/model/Action";
-import { Entity } from "../../../framework/model/Entity";
-import { Field } from "../../../framework/model/Field";
+import { Action } from "../../../framework/shared/Action";
+import { Entity } from "../../../framework/shared/Entity";
+import { Field } from "../../../framework/shared/Field";
 import { Status, Task, Type } from "../../entities/Task";
 
 @Entity()
 export class ChangeTypeParams {
     @Field({
+        label: 'Type',
         required: true
     })
     type!: Type;
@@ -13,6 +14,7 @@ export class ChangeTypeParams {
 
 
 @Action({
+    label: 'Change type',
     type: 'record',
     entity: Task
 })

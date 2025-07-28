@@ -1,8 +1,9 @@
-import { Action } from "../../../framework/model/Action";
+import { Action } from "../../../framework/shared/Action";
 import AppDataSource from "../../dataSources/MainDb";
 import { Task } from "../../entities/Task";
 
 @Action({
+    label: 'Get stats',
     type: 'entity',
     entity: Task
 })

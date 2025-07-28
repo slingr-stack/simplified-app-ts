@@ -1,7 +1,8 @@
-import { Action } from "../../../framework/model/Action";
+import { Action } from "../../../framework/shared/Action";
 import { Status, Task } from "../../entities/Task";
 
 @Action({
+    label: 'Complete',
     type: 'record',
     entity: Task
 })

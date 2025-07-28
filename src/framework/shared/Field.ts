@@ -1,4 +1,6 @@
 import "reflect-metadata";
+import { FieldUi } from "../ui/fields/FieldUi";
+import { FieldModel } from "../model/FieldModel";
 
 const fieldOptionsKey = Symbol("fieldOptions");
 
@@ -8,14 +10,5 @@ export const Field = (options?: FieldOptions): PropertyDecorator => {
     }
 };
 
-export interface FieldOptions {
-    required?: boolean;
-    calculation?: (data: any) => any;
-    access?: (data: any) => boolean | Access;
-}
-
-export enum Access {
-    ReadOnly = "readOnly",
-    ReadWrite = "readWrite",
-    None = "none"
+export interface FieldOptions extends FieldUi, FieldModel {
 }

@@ -1,12 +1,10 @@
-import { Action } from "../../framework/model/Action";
-import { Entity } from "../../framework/model/Entity";
-import { Field } from "../../framework/model/Field";
-import { Relationship } from "../../framework/model/types/Relationship";
+import { Action } from "../../framework/shared/Action";
+import { Entity } from "../../framework/shared/Entity";
+import { Field } from "../../framework/shared/Field";
+import { Relationship } from "../../framework/shared/types/Relationship";
 import { Project, Status } from "../entities/Project";
 
-@Entity({
-    type: 'global'
-})
+@Entity()
 export class GetSummaryParams {
     @Relationship({
         filter: (query) => {
@@ -14,14 +12,18 @@ export class GetSummaryParams {
         }
     })
     @Field({
+        label: 'Project',
         required: true
     })
     project!: Project;
 }
 
-@Action()
+@Action({
+    label: 'Get summary',
+    type: 'global'
+})
 export class GetSummary {
-    execute(params: GetSummaryParams) {
+    async execute(params: GetSummaryParams) {
         // TODO
         return {};
     }

@@ -1,4 +1,6 @@
 import "reflect-metadata";
+import { EntityModel } from "../model/EntityModel";
+import { EntityUi } from "../ui/EntityUi";
 
 const entityOptionsKey = Symbol("entityOptions");
 
@@ -15,5 +17,5 @@ export const Entity = (options?: EntityOptions) => <T extends { new (...args: an
     return target as any;
 };
 
-export interface EntityOptions {
+export interface EntityOptions extends EntityModel, EntityUi {
 }

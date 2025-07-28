@@ -1,4 +1,6 @@
 import "reflect-metadata";
+import { IntegerModel } from "../../model/types/IntegerModel";
+import { IntegerUi } from "../../ui/types/IntegerUi";
 
 const IntegerOptionsKey = Symbol("integerOptions");
 
@@ -6,9 +8,5 @@ export const Integer = (options?: IntegerOptions) => (target: any, propertyKey: 
     Reflect.defineMetadata(IntegerOptionsKey, options, target, propertyKey);
 };
 
-export interface IntegerOptions {
-    min?: number;
-    max?: number;
-    positive?: boolean;
-    negative?: boolean;
+export interface IntegerOptions extends IntegerModel, IntegerUi {
 }

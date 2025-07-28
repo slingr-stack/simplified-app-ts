@@ -1,119 +1,102 @@
-import { Persistent } from "../../framework/model/db/Persistent";
-import { Entity } from "../../framework/model/Entity";
-import { Field } from "../../framework/model/Field";
+import { Entity } from "../../framework/shared/Entity";
+import { Field } from "../../framework/shared/Field";
 import { AutoIncremental } from "../../framework/model/db/AutoIncremental";
-import { Text } from "../../framework/model/types/Text";
+import { Text } from "../../framework/shared/types/Text";
 import { Project, Status as ProjectStatus } from "./Project";
-import { Relationship } from "../../framework/model/types/Relationship";
-import { Integer } from "../../framework/model/types/Integer";
-import { Html } from "../../framework/model/types/Html";
+import { Relationship } from "../../framework/shared/types/Relationship";
+import { Integer } from "../../framework/shared/types/Integer";
+import { Html } from "../../framework/shared/types/Html";
 import { BaseEntity } from "typeorm";
-import { RecordLabel } from "../../framework/ui/RecordLabel";
-import { FieldUi } from "../../framework/ui/FieldUi";
-import { ChoiceUi } from "../../framework/ui/types/ChoiceUi";
-import { Choice } from "../../framework/model/types/Choice";
+import { Choice } from "../../framework/shared/types/Choice";
 
-@Persistent()
-@Entity()
+@Entity({
+    label: 'Tasks',
+    persistent: true
+})
 export class Task extends BaseEntity {
-    @FieldUi({
-        label: "Label"
-    })
-    @RecordLabel()
-    @Text()
     @Field({
+        label: "Label",
+        useAsLabel: true,
         calculation: (task: Task) => {
             return `#${task.number}. ${task.title}`;
         }
     })
+    @Text()
     label!: string;
 
 
-    @FieldUi({
-        label: "Project"
+    @Field({
+        label: "Project",
+        required: true
     })
     @Relationship({
         filter: (query) => {
             query.status = ProjectStatus.Active;
         }
     })
-    @Field({
-        required: true
-    })
     project!: Project;
 
 
-    @FieldUi({
+    @Field({
         label: "Number"
     })
     @AutoIncremental()
-    @Field()
     number!: number;
 
 
-    @FieldUi({
-        label: "Title"
-    })
-    @Text()
     @Field({
+        label: "Title",
         required: true
     })
+    @Text()
     title!: string;
 
 
-    @ChoiceUi<Status>({
+    @Field({
+        label: "Status",
+        required: true,
+    })
+    @Choice<Status>({
         labels: {
             toDo: "To Do",
             inProgress: "In Progress",
             done: "Done"
         }
     })
-    @FieldUi({
-        label: "Status"
-    })
-    @Field({
-        required: true,
-    })
     status: Status = Status.ToDo;
 
 
-    @ChoiceUi<Type>({
+    @Field({
+        label: "Type",
+        required: true,
+    })
+    @Choice<Type>({
         labels: {
             feature: "Feature",
             bug: "Bug",
             release: "Release"
         }
     })
-    @FieldUi({
-        label: "Type"
-    })
-    @Choice()
-    @Field({
-        required: true,
-    })
     type: Type = Type.Feature;
 
 
-    @FieldUi({
-        label: "Release Number"
-    })
-    @Integer({
-        positive: true
-    })
     @Field({
+        label: "Release Number",
         required: true,
         access: (task: Task) => {
             return task.type === Type.Release;
         }
     })
+    @Integer({
+        positive: true
+    })
     releaseNumber!: number;
 
-    
-    @FieldUi({
+
+    @Field({
         label: "Description"
     })
     @Html()
-    @Field()
     description!: string;
 }
 

@@ -1,4 +1,6 @@
 import "reflect-metadata";
+import { ActionModel } from "../model/ActionModel";
+import { ActionUi } from "../ui/ActionUi";
 
 const actionOptionsKey = Symbol("actionOptions");
 
@@ -8,8 +10,5 @@ export const Action = (options?: ActionOptions): ClassDecorator => {
     }
 };
 
-export interface ActionOptions {
-    type: 'record' | 'manyRecords' | 'entity' | 'global';
-    entity?: any,
-    executeInBackground?: boolean;
+export interface ActionOptions extends ActionModel, ActionUi {
 }
