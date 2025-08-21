@@ -7,7 +7,7 @@ import { BaseEntity } from "typeorm";
 import { Choice } from "../../framework/shared/types/Choice";
 import { Integer } from "../../framework/shared/types/Integer";
 
-@Entity({
+@Model({
   label: "Admin",
   persistent: true,
 })

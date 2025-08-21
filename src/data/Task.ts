@@ -10,7 +10,7 @@ import { BaseEntity } from "typeorm";
 import { Choice } from "../framework/shared/types/Choice";
 import { Note } from "./Note";
 
-@Entity({
+@Model({
   label: "Tasks",
   persistent: true,
 })
